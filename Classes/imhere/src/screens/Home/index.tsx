@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { Text, View, TextInput } from "react-native";
 import { styles } from "./styles";
 
 export default function Home() {
@@ -11,6 +11,12 @@ export default function Home() {
       <Text style={styles.date}>
         November 25th, 2023
       </Text>
+
+      <TextInput 
+        style={styles.input}
+        placeholder="Participant's name"
+        placeholderTextColor= "#FFFFFF"
+      />
 
     </View>
   )

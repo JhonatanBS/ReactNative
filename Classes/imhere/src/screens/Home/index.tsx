@@ -17,18 +17,19 @@ export default function Home() {
         November 25th, 2023
       </Text>
 
-      <TextInput 
-        style={styles.input}
-        placeholder="Participant's name"
-        placeholderTextColor= "#FFFFFF"
-      />
+      <View style={styles.form}>
+        <TextInput 
+          style={styles.input}
+          placeholder="Participant's name"
+          placeholderTextColor= "#FFFFFF"
+        />
 
-      <TouchableOpacity style={styles.button} onPress={handleParticipantAdd}>
-        <Text style={styles.buttonText}>
-          +
-        </Text>
-      </TouchableOpacity>
-
+        <TouchableOpacity style={styles.button} onPress={handleParticipantAdd}>
+          <Text style={styles.buttonText}>
+            +
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   )
 }

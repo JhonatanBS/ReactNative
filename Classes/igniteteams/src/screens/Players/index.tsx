@@ -8,12 +8,14 @@ import { Highlight } from "@components/Highlight";
 import { Input } from "@components/Input";
 import { Filter } from "@components/Filter";
 import { PlayerCard } from "@components/PlayerCard";
+import { ListEmpty } from "@components/ListEmpty";
+import { Button } from "@components/Button";
 
 import { useState } from "react";
 
 export function Players() {
   const [team, setTeam] = useState("Team A");
-  const [players, setPlayers] = useState(["Jhonatan", "Thiago"]);
+  const [players, setPlayers] = useState(["Diego"]);
 
   return (
     <Container>
@@ -61,13 +63,27 @@ export function Players() {
         data={players}
         keyExtractor={item => item}
         renderItem={({ item }) => (
-          <PlayerCard 
-          name={item} 
-          onRemove={() => {}}
+          <PlayerCard
+            name={item}
+            onRemove={() => { }}
           />
         )}
+
+        ListEmptyComponent={() => (
+          <ListEmpty message="There is no people on the Team" />
+        )}
+
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={[
+          { paddingBottom: 100 },
+          players.length === 0 && { flex: 1 }
+        ]}
       />
 
+      <Button 
+        title="Remove Team"
+        type="SECONDARY"
+      />
     </Container>
   )
 }

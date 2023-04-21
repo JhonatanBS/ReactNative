@@ -1,6 +1,7 @@
+import { useState } from 'react';
+
 import { FlatList } from 'react-native';
 
-import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
 import { Header } from '@components/Header';

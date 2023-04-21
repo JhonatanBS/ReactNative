@@ -1,16 +1,22 @@
+import { useState } from "react";
+
+import { Container, Content, Icon } from "./styles";
+
 import { Input } from "@components/Input";
 import { Header } from "@components/Header";
-import { Container, Content, Icon } from "./styles";
 import { Highlight } from "@components/Highlight";
 import { Button } from "@components/Button";
 import { useNavigation } from "@react-navigation/native";
 
 export function NewGroup() {
+  const [ group, setGroup ] = useState("");
+
   const navigate = useNavigation();
 
   function handleNew() {
-    navigate.navigate("players", { group: "Rocket"})
+    navigate.navigate("players", { group })
   }
+
   return(
     <Container>
       <Header showBackButton />
@@ -24,7 +30,7 @@ export function NewGroup() {
 
         <Input 
           placeholder="Name of the Team"
-
+          onChangeText={setGroup}
         />
 
         <Button 

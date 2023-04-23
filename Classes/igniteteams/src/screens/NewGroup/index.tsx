@@ -1,3 +1,4 @@
+import { Alert } from "react-native";
 import { useState } from "react";
 
 import { groupCreate } from "@storage/group/groupCreate";
@@ -9,6 +10,7 @@ import { Header } from "@components/Header";
 import { Highlight } from "@components/Highlight";
 import { Button } from "@components/Button";
 import { useNavigation } from "@react-navigation/native";
+import { AppError } from "@utils/AppError";
 
 export function NewGroup() {
   const [ group, setGroup ] = useState("");
@@ -17,11 +19,20 @@ export function NewGroup() {
 
   async function handleNew() {
     try {
+      if(group.trim().length === 0) {
+        return Alert.alert("New Group", "Name of Group is Empty!");
+      }
+
       await groupCreate(group);
       navigate.navigate("players", { group })
       
     } catch (error) {
-      console.log(error);
+      if( error instanceof AppError) {
+        Alert.alert("New Group", error.message);
+      }else{
+        Alert.alert("New Group", "You can't create a new group!");
+        console.log(error);
+      }
     }
   }
 

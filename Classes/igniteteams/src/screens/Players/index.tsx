@@ -1,5 +1,5 @@
 import { useState, useEffect , useRef} from "react";
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 import { Alert, FlatList, TextInput } from "react-native";
 
@@ -11,7 +11,6 @@ import { PlayersStorageDTO } from "@storage/player/PlayersStorageDTO";
 
 import { AppError } from "@utils/AppError";
 
-
 import { ButtonIcon } from "@components/ButtonIcon";
 import { Header } from "@components/Header";
 import { Highlight } from "@components/Highlight";
@@ -21,6 +20,7 @@ import { PlayerCard } from "@components/PlayerCard";
 import { ListEmpty } from "@components/ListEmpty";
 import { Button } from "@components/Button";
 import { playerRemoveByGroups } from "@storage/player/playerRemoveByGroups";
+import { groupRemoveByName } from "@storage/group/groupRemoveByName";
 
 type RouteParams = {
   group: string;
@@ -33,12 +33,14 @@ export function Players() {
 
   const newPlayerNameInputRef = useRef<TextInput>(null);
 
+  const navigation = useNavigation();
+
   const route = useRoute();
   const { group } = route.params as RouteParams;
 
   async function handleAddPlayer() {
     if(newNamePlayer.trim().length === 0) {
-      Alert.alert("New Person", "Inform the name of person for add");
+      return Alert.alert("New Person", "Inform the name of person for add");
     }
     const newPlayer = {
       name: newNamePlayer,
@@ -82,6 +84,33 @@ export function Players() {
       Alert.alert("Don't Removed", "User don't removed!");
     }
   }
+
+async function groupRemove() {
+  try {
+    await groupRemoveByName(group);
+
+    navigation.navigate("groups");
+
+  } catch (error) {
+    throw error;
+  }
+}  
+
+async function handleGroupRemove() {
+  Alert.alert(
+    "Remove", 
+    "Do you want to remove the group?",
+    [{
+      text: "No",
+      style: "cancel"
+    },
+    {
+      text: "Yes",
+      onPress: () => groupRemove()
+    }
+    ]
+    )
+}
 
   useEffect(() => {
     fetchPlayersByTeam();
@@ -159,6 +188,7 @@ export function Players() {
       <Button 
         title="Remove Team"
         type="SECONDARY"
+        onPress={handleGroupRemove}
       />
     </Container>
   )

@@ -13,8 +13,10 @@ import { ListEmpty } from '@components/ListEmpty';
 import { Button } from '@components/Button';
 
 import { Container } from './styles';
+import { Loading } from '@components/Loading';
 
 export function Groups() {
+  const [isLoading, setIsLoading ] = useState(true);
   const [ groups, setGroups] = useState<string[]>([]);
 
   const navigation = useNavigation();
@@ -25,11 +27,14 @@ export function Groups() {
 
   async function fetchGroups() {
     try {
+      setIsLoading(true);
       const data = await groupsGetAll();
       setGroups(data);
-
+      
     } catch (error) {
       console.log(error);
+    } finally{
+      setIsLoading(false);
     }
   }
 
@@ -45,10 +50,13 @@ export function Groups() {
     <Container >
       <Header />
       <Highlight 
-        title="Teams"
+        title="Groups"
         subtitle="Play with your Team"
       />
 
+      { isLoading ? 
+      <Loading /> 
+      : 
       <FlatList 
         data={groups}
         keyExtractor={(item) => item}
@@ -64,9 +72,10 @@ export function Groups() {
         )}
         showsVerticalScrollIndicator={false}
       />
+    }
 
     <Button 
-      title="Create a new team"
+      title="Create a new Group"
       onPress={handleNewGroup}
     />
     </Container>

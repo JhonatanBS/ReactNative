@@ -11,6 +11,7 @@ import { PlayersStorageDTO } from "@storage/player/PlayersStorageDTO";
 
 import { AppError } from "@utils/AppError";
 
+import { Loading } from "@components/Loading";
 import { ButtonIcon } from "@components/ButtonIcon";
 import { Header } from "@components/Header";
 import { Highlight } from "@components/Highlight";
@@ -27,6 +28,7 @@ type RouteParams = {
 }
 
 export function Players() {
+  const [isLoading, setIsLoading ] = useState(true);
   const [newNamePlayer, setNewNamePlayer] = useState("");
   const [team, setTeam] = useState("Team A");
   const [players, setPlayers] = useState<PlayersStorageDTO[]>([]);
@@ -66,19 +68,25 @@ export function Players() {
 
   async function fetchPlayersByTeam() {
     try {
+      setIsLoading(true);
+
       const playersByTeam = await playersGetByGroupAndTeam(group, team);
       setPlayers(playersByTeam);
+
     } catch (error) {
       console.log(error);
       Alert.alert("People", "Unable to load people of team");
+    }finally{
+      setIsLoading(false);
     }
   }
 
   async function handlePlayerRemove(playerName: string) {
     try {
+      
       await playerRemoveByGroups(playerName, group);
       fetchPlayersByTeam();
-
+      
     } catch (error) {
       console.log(error);
       Alert.alert("Don't Removed", "User don't removed!");
@@ -164,6 +172,9 @@ async function handleGroupRemove() {
         </NumbersOfPlayers>
       </HeaderList>
 
+      {isLoading ? 
+      <Loading /> 
+      : 
       <FlatList
         data={players}
         keyExtractor={item => item.name}
@@ -184,9 +195,10 @@ async function handleGroupRemove() {
           players.length === 0 && { flex: 1 }
         ]}
       />
+    }
 
       <Button 
-        title="Remove Team"
+        title="Remove Group"
         type="SECONDARY"
         onPress={handleGroupRemove}
       />

@@ -20,6 +20,7 @@ import { Filter } from "@components/Filter";
 import { PlayerCard } from "@components/PlayerCard";
 import { ListEmpty } from "@components/ListEmpty";
 import { Button } from "@components/Button";
+import { playerRemoveByGroups } from "@storage/player/playerRemoveByGroups";
 
 type RouteParams = {
   group: string;
@@ -68,6 +69,17 @@ export function Players() {
     } catch (error) {
       console.log(error);
       Alert.alert("People", "Unable to load people of team");
+    }
+  }
+
+  async function handlePlayerRemove(playerName: string) {
+    try {
+      await playerRemoveByGroups(playerName, group);
+      fetchPlayersByTeam();
+
+    } catch (error) {
+      console.log(error);
+      Alert.alert("Don't Removed", "User don't removed!");
     }
   }
 
@@ -129,7 +141,7 @@ export function Players() {
         renderItem={({ item }) => (
           <PlayerCard
             name={item.name}
-            onRemove={() => { }}
+            onRemove={() => handlePlayerRemove(item.name)}
           />
         )}
 

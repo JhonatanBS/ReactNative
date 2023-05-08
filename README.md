@@ -20,9 +20,9 @@
     </thead>
     <tbody>
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td><a href="https://github.com/JhonatanBS/Ignite-Todo-mobile" target="_blank">Todo</a></td>
+            <td>Create and remove Tasks for organize</td>
+            <td>CHALLENGE</td>
         </tr>
         <tr>
             <td></td>

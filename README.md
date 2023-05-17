@@ -2,12 +2,14 @@
 
 <p align="center"> 
 <strong>
-<a href="https://reactnative.dev/" target=_blank>React Native<a/> is a Javascript library created by Facebook. It is used to develop apps for Android and iOS systems natively.
+<a href="https://reactnative.dev/" target=_blank>React Native</a> is a Javascript library created by Facebook. It is used to develop apps for Android and iOS systems natively.
 </strong>
 </p>
 
 <br/>
-
+<div align="center">
+<img src="./Assets/Projects.svg" width="300px">
+</div>
 <br/>
 
 <table>
@@ -36,3 +38,8 @@
         </tr>
     </tbody>
 </table>
+
+
+<div align="center">
+<img src="./Assets/Certificates.svg" width="300px">
+</div>

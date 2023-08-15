@@ -1,5 +1,6 @@
 import { ScreenHeader } from "@components/ScreenHeader";
-import { VStack } from "native-base";
+import { UserPhoto } from "@components/UserPhoto";
+import { Center, ScrollView, VStack } from "native-base";
 
 export function Profile() {
   return (
@@ -7,6 +8,16 @@ export function Profile() {
       <ScreenHeader 
         title="Perfil"
       />
+
+      <ScrollView>
+        <Center mt={6} px={10}>
+        <UserPhoto 
+          source={{uri: "https://github.com/rodrigorgtic.png" }}
+          alt="Foto do usuário"
+          size={33}
+        />
+        </Center>
+      </ScrollView>
     </VStack>
   )
 }

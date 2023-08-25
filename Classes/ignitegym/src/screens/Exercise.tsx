@@ -1,4 +1,4 @@
-import { Box, HStack, Heading, Icon, Image, Text, VStack } from "native-base";
+import { Box, HStack, Heading, Icon, Image, Text, VStack, ScrollView } from "native-base";
 import { TouchableOpacity } from "react-native";
 
 import { Feather } from "@expo/vector-icons";
@@ -39,6 +39,7 @@ export function Exercise() {
         </HStack>
       </VStack>
 
+<ScrollView>
       <VStack p={8}>
         <Image
           source={{ uri: "https://conteudo.imguol.com.br/c/entretenimento/0c/2019/12/03/remada-unilateral-com-halteres-1575402100538_v2_600x600.jpg" }}
@@ -76,6 +77,7 @@ export function Exercise() {
           />
         </Box>
       </VStack>
+      </ScrollView>
     </VStack>
   )
 }

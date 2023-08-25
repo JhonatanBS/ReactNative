@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { TouchableOpacity } from "react-native";
 
+import * as ImagePicker from "expo-image-picker";
+
 import { Center, ScrollView, VStack, Skeleton, Text, Heading } from "native-base";
 
 import { ScreenHeader } from "@components/ScreenHeader";
@@ -12,6 +14,34 @@ const PHOTO_SIZE = 33;
 
 export function Profile() {
   const [photoIsLoading, setPhotoIsLoading] = useState(false);
+  const [userPhoto, setUserPhoto] = useState("https://github.com/rodrigorgtic.png");
+
+  async function handleUserPhotoSelect() {
+    setPhotoIsLoading(true);
+
+    try {
+      const photoSelected = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        quality: 1,
+        aspect: [4, 4],
+        allowsEditing: true
+      });
+
+      if (photoSelected.canceled) {
+        return;
+      }
+
+      if (photoSelected.assets[0].uri) {
+        setUserPhoto(photoSelected.assets[0].uri);
+      }
+
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setPhotoIsLoading(false);
+    }
+
+  }
 
   return (
     <VStack flex={1}>
@@ -32,24 +62,24 @@ export function Profile() {
               />
               :
               <UserPhoto
-                source={{ uri: "https://github.com/rodrigorgtic.png" }}
+                source={{ uri: userPhoto }}
                 alt="Foto do usuário"
                 size={33}
               />
           }
 
-          <TouchableOpacity >
+          <TouchableOpacity onPress={handleUserPhotoSelect}>
             <Text color="green.500" fontWeight="bold" fontSize="md" mt={2} mb={8}>
               Alterar foto
             </Text>
           </TouchableOpacity>
 
-          <Input 
+          <Input
             bg="gray.600"
             placeholder="Nome"
           />
 
-          <Input 
+          <Input
             bg="gray.600"
             value="E-mail"
             isDisabled
@@ -61,25 +91,25 @@ export function Profile() {
             Alterar senha
           </Heading>
 
-          <Input 
+          <Input
             bg="gray.600"
             placeholder="Senha antiga"
             secureTextEntry
           />
 
-          <Input 
+          <Input
             bg="gray.600"
             placeholder="Nova Senha"
             secureTextEntry
           />
 
-          <Input 
+          <Input
             bg="gray.600"
             placeholder="Confirme a nova senha"
             secureTextEntry
           />
 
-          <Button 
+          <Button
             title="Atualizar"
             mt={4}
           />

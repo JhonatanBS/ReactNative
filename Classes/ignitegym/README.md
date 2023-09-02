@@ -3,7 +3,7 @@
 
   <p> 
     <strong>
-      The project was developed for creating tasks.
+      Project was developed to manage the training of a gym.
     </strong>
   </p>
 

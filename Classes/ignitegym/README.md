@@ -13,7 +13,7 @@
 
   <br>
 
-  <img src="./assets/home.png">
+  <img src="./assets/home.png" width="50%">
 
   <hr>
     <h4>Historic<h4>
@@ -21,7 +21,7 @@
 
   <br>
 
-  <img src="./assets/Historico.png">
+  <img src="./assets/Historico.png" width="50%"> 
 
   <hr>
     <h4>Profile<h4>
@@ -29,7 +29,7 @@
 
   <br>
 
-  <img src="./assets/Perfil.png">
+  <img src="./assets/Perfil.png" width="50%">
 
   <hr>
     <h4>Exercise<h4>
@@ -37,6 +37,6 @@
 
   <br>
 
-  <img src="./assets/Exercicio.png">
+  <img src="./assets/Exercicio.png" width="50%">
 </div>
 

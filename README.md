@@ -25,20 +25,21 @@
       <tbody>
           <tr>
               <td><a href="https://github.com/JhonatanBS/Ignite-Todo-mobile" target="_blank">Todo</a></td>
-              <td>Create and remove Tasks for organize</td>
+              <td>Create and remove tasks/todos for organize</td>
               <td>CHALLENGE</td>
               <td><a href="https://styled-components.com/">Styled-Components</a></td>
           </tr>
           <tr>
               <td><a href="https://github.com/JhonatanBS/ReactNative/tree/main/Classes/ignitegym" target="_blank">Ignite Gym</a></td>
-              <td>It's a Manage of the exercises</td>
+              <td>It's a manage of the exercises</td>
               <td>CLASS</td>
               <td><a href="https://nativebase.io/">Native Base</a></td>
           </tr>
           <tr>
-              <td></td>
-              <td></td>
-               <td></td>
+              <td><a href="https://github.com/JhonatanBS/ReactNative/tree/main/Classes/igniteteams" target="_blank">Ignite Teams</a></td>
+              <td>It's a manage of the groups of teams</td>
+              <td>CLASS</td>
+              <td><a href="https://styled-components.com/">Styled-components</a></td>
           </tr>
       </tbody>
   </table>

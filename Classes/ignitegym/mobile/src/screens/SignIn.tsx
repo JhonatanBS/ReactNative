@@ -41,8 +41,8 @@ export function SignIn() {
     navigation.navigate("signUp");
   }
 
-  function handleSignIn({ email, password }: FormData) {
-    signIn(email, password);
+  async function handleSignIn({ email, password }: FormData) {
+    await signIn(email, password);
   }
 
   return(
@@ -81,7 +81,6 @@ export function SignIn() {
               value={value}
               errorMessage={errors.email?.message}
             />
-
           )}
         />
 
@@ -89,13 +88,13 @@ export function SignIn() {
             control={control}
             name="password"
             render={({ field: { onChange, value } }) => (
-              <Input
-            placeholder="Senha"
-            secureTextEntry
-            onChangeText={onChange}
-            value={value}
-            errorMessage={errors.password?.message}
-          />
+            <Input
+              placeholder="Senha"
+              secureTextEntry
+              onChangeText={onChange}
+              value={value}
+              errorMessage={errors.password?.message}
+            />
             )}
           />
 
@@ -115,7 +114,7 @@ export function SignIn() {
           title="Criar conta" 
           variant="outline"
           onPress={handleNewAccount}
-          />
+        />
       </Center>
 
     </VStack>

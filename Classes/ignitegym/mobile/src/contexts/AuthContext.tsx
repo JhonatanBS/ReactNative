@@ -1,8 +1,8 @@
-import { ReactNode, createContext, useState } from "react";
+import { ReactNode, createContext, useEffect, useState } from "react";
 
 import { UserDTO } from "@dtos/UserDTO";
 import { api } from "@services/api";
-import { storageUserSave } from "@storage/storageConfig";
+import { storageUserGet, storageUserSave } from "@storage/storageConfig";
 
 type AuthContextDataProps = {
   user: UserDTO;
@@ -18,8 +18,6 @@ export const AuthContext = createContext<AuthContextDataProps>({} as AuthContext
 export function AuthContextProvider({ children }: AuthContextProviderProps) {
   const [ user, setUser ] = useState<UserDTO>({} as UserDTO);
 
-  console.log("Usuario logado =>", user);
-
   async function signIn(email: string, password: string) {
     try {
       const { data } = await api.post("/sessions", { email, password });
@@ -32,7 +30,19 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
       console.log(error);
     }
     
-  } 
+  }
+
+  async function loadUserData() {
+    const userLogged = await storageUserGet();
+
+    if( userLogged ) {
+      setUser(userLogged);
+    }
+  }
+
+  useEffect(() => {
+    loadUserData();
+}, []);
 
   return(
     <AuthContext.Provider value={{ user , signIn }}>

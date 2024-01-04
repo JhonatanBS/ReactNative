@@ -15,7 +15,7 @@ const PHOTO_SIZE = 33;
 
 export function Profile() {
   const [photoIsLoading, setPhotoIsLoading] = useState(false);
-  const [userPhoto, setUserPhoto] = useState("https://github.com/rodrigorgtic.png");
+  const [userPhoto, setUserPhoto] = useState("https://github.com/orodrigogo.png");
 
   const toast = useToast();
 

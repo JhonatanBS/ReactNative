@@ -4,20 +4,38 @@ import { Alert, TouchableOpacity } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import * as FileSystem from 'expo-file-system';
 
+import { Controller, useForm } from "react-hook-form";
+
 import { Center, ScrollView, VStack, Skeleton, Text, Heading, useToast } from "native-base";
 
 import { ScreenHeader } from "@components/ScreenHeader";
 import { UserPhoto } from "@components/UserPhoto";
 import { Input } from "@components/Input";
 import { Button } from "@components/Button";
+import { useAuth } from "@hooks/useAuth";
 
 const PHOTO_SIZE = 33;
+
+type FormDataProps = {
+  name: string;
+  email: string;
+  password: string;
+  old_password: string;
+  confirm_password: string;
+}
 
 export function Profile() {
   const [photoIsLoading, setPhotoIsLoading] = useState(false);
   const [userPhoto, setUserPhoto] = useState("https://github.com/orodrigogo.png");
 
   const toast = useToast();
+  const { user } = useAuth();
+  const { control } = useForm<FormDataProps>({
+    defaultValues: {
+      name: user.name,
+      email: user.email
+    }
+  });
 
   async function handleUserPhotoSelect() {
     setPhotoIsLoading(true);
@@ -35,10 +53,10 @@ export function Profile() {
       }
 
       if (photoSelected.assets[0].uri) {
-        const photoInfo = await FileSystem.getInfoAsync(photoSelected.assets[0].uri, { size: true});
-        
+        const photoInfo = await FileSystem.getInfoAsync(photoSelected.assets[0].uri, { size: true });
+
         console.log(photoInfo)
-        if(photoInfo.size && (photoInfo.size / 1024 / 1024) > 5) {
+        if (photoInfo.size && (photoInfo.size / 1024 / 1024) > 5) {
           return toast.show({
             title: "Essa imagem é muito grande. Escolha um de até 5MB",
             placement: "top",
@@ -87,16 +105,33 @@ export function Profile() {
             </Text>
           </TouchableOpacity>
 
-          <Input
-            bg="gray.600"
-            placeholder="Nome"
+          <Controller
+            control={control}
+            name="name"
+            render={({ field: { value, onChange } }) => (
+              <Input
+                bg="gray.600"
+                placeholder="Nome"
+                onChangeText={onChange}
+                value={value}
+              />
+            )}
           />
 
-          <Input
-            bg="gray.600"
-            value="E-mail"
-            isDisabled
+          <Controller
+            control={control}
+            name="email"
+            render={({ field: { value, onChange } }) => (
+              <Input
+                bg="gray.600"
+                placeholder="E-mail"
+                isDisabled
+                onChangeText={onChange}
+                value={value}
+              />
+            )}
           />
+
         </Center>
 
         <VStack px={10} mt={12} mb={9}>

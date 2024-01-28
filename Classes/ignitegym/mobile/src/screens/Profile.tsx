@@ -25,7 +25,7 @@ type FormDataProps = {
   name: string;
   email: string;
   password?: string | null;
-  old_password: string;
+  old_password?: string;
   confirm_password?: string | null;
 }
 
@@ -43,7 +43,7 @@ const profileSchema = yup.object(
       .min(6, "A senha deve ter pelo menos 6 dígitos")
       .nullable()
       .transform((value) => !!value ? value : null),
-    old_password: yup.string().required("Informe a antiga senha"),
+    old_password: yup.string(),
     confirm_password: yup
       .string()
       .nullable()
@@ -66,7 +66,7 @@ export function Profile() {
   const [isUpdating, setIsUpdating] = useState(false);
 
   const toast = useToast();
-  const { user } = useAuth();
+  const { user , updateUserProfile} = useAuth();
   const { control, handleSubmit, formState: { errors } } = useForm<FormDataProps>({
     defaultValues: {
       name: user.name,
@@ -114,8 +114,13 @@ export function Profile() {
   async function handleProfileUpdate(data: FormDataProps) {
     try {
       setIsUpdating(true);
+
+      const userUpdated = user;
+      userUpdated.name = data.name;
         
       await api.put("/users", data);
+
+      await updateUserProfile(userUpdated);
 
       toast.show({
         title: "O seu perfil foi atualizado com sucesso",

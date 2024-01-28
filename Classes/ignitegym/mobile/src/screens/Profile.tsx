@@ -16,6 +16,8 @@ import { UserPhoto } from "@components/UserPhoto";
 import { Input } from "@components/Input";
 import { Button } from "@components/Button";
 import { useAuth } from "@hooks/useAuth";
+import { api } from "@services/api";
+import { AppError } from "@utils/AppError";
 
 const PHOTO_SIZE = 33;
 
@@ -61,6 +63,7 @@ const profileSchema = yup.object(
 export function Profile() {
   const [photoIsLoading, setPhotoIsLoading] = useState(false);
   const [userPhoto, setUserPhoto] = useState("https://github.com/orodrigogo.png");
+  const [isUpdating, setIsUpdating] = useState(false);
 
   const toast = useToast();
   const { user } = useAuth();
@@ -108,8 +111,30 @@ export function Profile() {
 
   }
 
-  function handleProfileUpdate(data: FormDataProps) {
-    console.log(data);
+  async function handleProfileUpdate(data: FormDataProps) {
+    try {
+      setIsUpdating(true);
+        
+      await api.put("/users", data);
+
+      toast.show({
+        title: "O seu perfil foi atualizado com sucesso",
+        placement: "top",
+        bgColor: "green.500"
+      })
+
+    } catch (error) {
+      const isAppError = error instanceof AppError;
+      const title = isAppError ? error.message : "Não foi possível entrar. Tente novamente mais tarde!"
+
+      toast.show({
+        title,
+        placement: "bottom-right",
+        bgColor: "red.500"
+      });
+    } finally {
+      setIsUpdating(false);
+    }
   }
 
   return (
@@ -224,6 +249,7 @@ export function Profile() {
             title="Atualizar"
             mt={4}
             onPress={handleSubmit(handleProfileUpdate)}
+            isLoading={isUpdating}
           />
         </VStack>
       </ScrollView>

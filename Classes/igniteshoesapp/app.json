@@ -37,6 +37,12 @@
         {
           "mode": "development"
         }
+      ],
+      [
+        "expo-dev-launcher",
+        {
+          "launchModeExperimental": "most-recent"
+        }
       ]
     ]
   }

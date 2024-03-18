@@ -59,6 +59,12 @@
               <td>CLASS</td>
               <td><a href="https://styled-components.com/">Native Base</a></td>
           </tr>
+          <tr>
+              <td><a href="https://github.com/JhonatanBS/ReactNative/tree/main/Classes/ignitequiz" target="_blank">Ignite Quiz</a></td>
+              <td>It's a gamer with quiz</td>
+              <td>CLASS</td>
+              <td><a href="https://styled-components.com/">React Native Reanimated </a></td>
+          </tr>
       </tbody>
   </table>
 

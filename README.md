@@ -63,7 +63,13 @@
               <td><a href="https://github.com/JhonatanBS/ReactNative/tree/main/Classes/ignitequiz" target="_blank">Ignite Quiz</a></td>
               <td>It's a gamer with quiz</td>
               <td>CLASS</td>
-              <td><a href="https://styled-components.com/">React Native Reanimated </a></td>
+              <td><a href="https://styled-components.com/">React Native Reanimated</a></td>
+          </tr>
+        <tr>
+              <td><a href="https://github.com/JhonatanBS/CoffeeDelivery" target="_blank">Coffee Delivery</a></td>
+              <td>It's a service of coffee delivery</td>
+              <td>CHALLENGE</td>
+              <td><a href="https://styled-components.com/">React Native Reanimated</a></td>
           </tr>
       </tbody>
   </table>

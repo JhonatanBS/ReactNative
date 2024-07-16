@@ -77,4 +77,13 @@
   <div align="center">
     <img src="./Assets/Certificates.svg" width="300px">
   </div>
+
+  <hr/>
+  <img src="./Assets/certificate-fundamentals.jpg">
+  <hr/>
+
+  <img src="Assets/certificate-styling.jpg">
+<hr/>
+  <img src="Assets/certificate-backend.jpg">
+  <hr/>
 </div>
